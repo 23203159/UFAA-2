@@ -106,3 +106,14 @@ WHERE `compilation_date` IS NOT NULL AND TRIM(`compilation_date`) <> '';
 -- d) Alter column types to DATE (removes timestamp storage permanently)
 ALTER TABLE `unclaimed_assets` MODIFY COLUMN `date_of_birth` DATE NULL;
 ALTER TABLE `unclaimed_assets` MODIFY COLUMN `compilation_date` DATE NULL;
+
+
+SQL query: Copy
+
+
+-- a) Delete records that are missing a compilation date
+DELETE FROM `unclaimed_assets`
+WHERE `compilation_date` IS NULL OR TRIM(`compilation_date`) = '';
+MySQL said: Documentation
+
+#1205 - Lock wait timeout exceeded; try restarting transaction
